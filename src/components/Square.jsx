@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { GRID } from '../utils/constants.js';
-
 class Square extends Component {
   render() {
     const { x, y, isExitCell } = this.props;
-
     
     const style = {
       top: y,
@@ -21,10 +19,7 @@ class Square extends Component {
       borderTop: 'solid',
       borderLeft: 'solid',
     };
-
     return <div style={style} />;
   }
 }
-
 export default Square;
-
