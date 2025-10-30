@@ -8,11 +8,8 @@ class CarView extends Component {
   }
 
   handleClick(event) {
-    
     const mx = event.nativeEvent.offsetX;
     const my = event.nativeEvent.offsetY;
-
-    
     let dir = 0;
     if (this.props.wid > this.props.hgt) {
       // horizontal car
@@ -22,7 +19,6 @@ class CarView extends Component {
       dir = my >= this.props.hgt/2 ? 1 : 0;
     }
 
-    
     this.props.cars.moveCar(this.props.idNum, dir);
   }
 
@@ -39,9 +35,7 @@ class CarView extends Component {
       borderRadius: CAR_RAD,
       position:     'absolute'
     };
-
     return <div style={style} onClick={this.handleClick} />;
   }
 }
-
 export default CarView;
