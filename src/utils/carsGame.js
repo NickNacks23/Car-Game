@@ -1,6 +1,4 @@
 import { WID, HGT } from './constants.js';
-
-
 const PUZZLES = [
   // Puzzle 1
   [
@@ -33,7 +31,6 @@ const PUZZLES = [
   ]
 ];
 
-
 const BEST = [
   20,  
   25,  
@@ -51,7 +48,6 @@ const BEST = [
  
     this._initCars = JSON.parse(JSON.stringify(PUZZLES[this.puzzleNumber]));
     this.cars = JSON.parse(JSON.stringify(this._initCars));
- 
  
     this._ensureNoOverlap();
   }
@@ -71,8 +67,6 @@ const BEST = [
       }
     } while (overlapFound);
   }
- 
- 
   _repositionCar(car) {
     const randomX = Math.floor(Math.random() * (WID - car.ncols));
     const randomY = Math.floor(Math.random() * (HGT - car.nrows));
@@ -80,42 +74,27 @@ const BEST = [
     car.y = randomY;
   }
  
- 
   setRedrawCallback(cb) {
     this._callback = cb;
   }
- 
- 
   hasWon() {
     return this.won;
   }
- 
- 
   getPuzzleNumber() {
     return this.puzzleNumber;
   }
- 
- 
   getNumCars() {
     return this.cars.length;
   }
- 
- 
   getNumMoves() {
     return this.moves;
   }
- 
- 
   getBestNumMoves() {
     return BEST[this.puzzleNumber] || 0;
   }
- 
- 
   getCar(idx) {
     return this.cars[idx];
   }
- 
- 
   loadPuzzle(num) {
     if (num < 0 || num >= PUZZLES.length) return;
     this.puzzleNumber = num;
@@ -124,25 +103,16 @@ const BEST = [
     this.moves = 0;
     this.won = false;
  
- 
     this._ensureNoOverlap();
- 
- 
     if (this._callback) this._callback();
   }
- 
- 
   resetPuzzle() {
     this.loadPuzzle(this.puzzleNumber);
   }
- 
- 
   nextPuzzle() {
     const next = (this.puzzleNumber + 1) % PUZZLES.length;
     this.loadPuzzle(next);
   }
- 
- 
   _overlaps(A, B) {
     return !(
       A.x + A.ncols <= B.x ||
@@ -152,12 +122,9 @@ const BEST = [
     );
   }
  
- 
   moveCar(id, dir) {
     const car = this.cars.find(c => c.id === id);
     if (!car || this.won) return;
- 
- 
     const next = { ...car };
     switch (dir) {
       case 0: next.y -= 1; break; 
@@ -167,30 +134,22 @@ const BEST = [
       default: return;
     }
  
- 
     if (next.x < 0 || next.y < 0 ||
         next.y + next.nrows > HGT ||
         (next.x + next.ncols > WID && id !== 0) ||
         next.x + next.ncols < 0
     ) return;
- 
- 
     for (const other of this.cars) {
       if (other.id === id) continue;
       if (this._overlaps(next, other)) return;
     }
- 
- 
+
     car.x = next.x;
     car.y = next.y;
     this.moves += 1;
- 
- 
     if (id === 0 && car.x + car.ncols > 6 && car.y === 2) {
       this.won = true;
     }
- 
- 
     if (this._callback) this._callback();
   }
  }
