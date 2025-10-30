@@ -51,7 +51,6 @@ class BoardView extends Component {
       }
     }
 
-    
     const cars = this.props.cars;
     const num = cars.getNumCars();
     for (let i = 0; i < num; i++) {
@@ -69,7 +68,6 @@ class BoardView extends Component {
         />
       );
     }
-
     const moves = cars.getNumMoves();
     const bestMoves = cars.getBestNumMoves();
     let youWonMessage = null;
@@ -83,7 +81,6 @@ class BoardView extends Component {
         />
       );
     }
-
     
     const arrowStyle = {
       position: 'absolute',
@@ -95,7 +92,6 @@ class BoardView extends Component {
       zIndex: 10, 
     };
 
-    
     const buttonStyle = {
       backgroundColor: '#00BFFF',
       color: 'white',
@@ -112,7 +108,6 @@ class BoardView extends Component {
       ...buttonStyle,
       backgroundColor: '#0099CC',
     };
-
     return (
       <div
         style={{
@@ -124,17 +119,14 @@ class BoardView extends Component {
           paddingLeft: '20px', 
         }}
       >
-        {/* Display the label with puzzle number and moves counter at the top of the grid */}
+        {/* Displays the label with the puzzle number and moves counter at the top of the grid */}
         <div style={{ color: '#00BFFF', fontSize: '18px', fontWeight: 'bold', textAlign: 'center' }}>
           Puzzle {cars.getPuzzleNumber() + 1} | Moves: {moves} / Goal: {bestMoves}
         </div>
-
-        {/* The game board with the border */}
+        {/* The game board with the boarder */}
         <div style={bStyle}>{list}</div>
-
         {/* Displays the "You Won!" message centered on top of the grid */}
         {youWonMessage}
-
         {/* Controls (Undo, Reset, Next buttons) */}
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <button
@@ -171,5 +163,4 @@ class BoardView extends Component {
     );
   }
 }
-
 export default BoardView;
